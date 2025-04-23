@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CCV Bazaar</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #39ff14;
+      font-family: monospace;
+      padding: 20px;
+    }
+    .banner {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+    .card-entry {
+      border: 1px solid #39ff14;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+    .buy-button {
+      background-color: black;
+      color: #39ff14;
+      border: 1px solid #39ff14;
+      padding: 5px;
+      cursor: pointer;
+    }
+    .login-form {
+      margin-top: 20px;
+    }
+    .login-input {
+      padding: 5px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">🔥 CCV Bazaar – Invite Only 🔥</div>
+
+  <p>Fresh drops from EU & US banks. Dumps updated hourly. Only verified sellers. No refunds.</p>
+
+  {% for card in cards %}
+  <div class="card-entry">
+    <strong>{{ card.name }} - BIN {{ card.bin }}</strong><br>
+    Country: {{ card.country }}<br>
+    Price: ${{ card.price }}<br>
+    <button class="buy-button" onclick="buyCard('{{ card.bin }}')">Buy Now</button>
+  </div>
+  {% endfor %}
+
+  <p>🛑 You must be invited to access our vault. All transactions in XMR only. 🛑</p>
+
+  <div class="login-form">
+    <h3>Login (only for verified members)</h3>
+    <form method="POST" action="/login">
+      <input type="text" class="login-input" name="username" placeholder="Username" required>
+      <input type="password" class="login-input" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function buyCard(bin) {
+      fetch(`/buy/${bin}`, { method: 'POST' })
+        .then(response => response.json())
+        .then(data => alert(data.message));
+    }
+  </script>
+</body>
+</html>
