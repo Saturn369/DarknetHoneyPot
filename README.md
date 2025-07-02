@@ -1,5 +1,5 @@
 # DarknetHoneyPot
-A literal darknet honeypot. Use it for inspiration or for your cybersecurity portfolio.
+A darknet honeypot. Use it for inspiration or for your cybersecurity portfolio.
 
 ---
 
